@@ -1,0 +1,42 @@
+# === installation_requirements.txt ===
+# Required packages list for local environment
+
+# File handling and document parsing
+PyPDF2              # for reading PDF files
+python-docx         # for reading DOCX files
+
+# OCR
+pytesseract         # OCR library to extract text from images
+Pillow              # Python Imaging Library (required for image operations)
+tesseract           # Tesseract binary (system-installed separately)
+
+# LLM and chat
+openai              # For OpenRouter / OpenAI API calls
+
+# Google Sheets
+gspread             # Google Sheets API wrapper
+oauth2client        # For Google authentication
+
+# Web search (optional)
+serpapi             # Real-time web search via SerpAPI (only if you want live search)
+
+# === To install via pip ===
+# pip install -r installation_requirements.txt
+
+# === Note ===
+# Also install Tesseract system-wide:
+# On Ubuntu: sudo apt-get install tesseract-ocr
+# On Windows: Download installer from https://github.com/tesseract-ocr/tesseract
+
+
+| Package        | Purpose                                                   |
+| -------------- | --------------------------------------------------------- |
+| `openai`       | Communicates with OpenRouter AI models for chat responses |
+| `PyPDF2`       | Extracts text from PDF files                              |
+| `python-docx`  | Extracts text from Word (.docx) documents                 |
+| `pytesseract`  | OCR (Optical Character Recognition) for images            |
+| `Pillow`       | Image processing (needed by pytesseract)                  |
+| `gspread`      | Works with Google Sheets API                              |
+| `oauth2client` | Authenticates service account with Google Sheets          |
+| `serpapi`      | Performs real-time Google search using SerpAPI            |
+______________________________________________________________________________

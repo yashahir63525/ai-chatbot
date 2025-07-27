@@ -1,0 +1,8 @@
+openai
+PyPDF2
+python-docx
+pytesseract
+pillow
+gspread
+oauth2client
+serpapi

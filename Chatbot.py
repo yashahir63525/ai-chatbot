@@ -5,16 +5,36 @@
 # Run first if this is first time this command "pip install -r requirements.txt"
 
 import os
+import json
 import pytesseract
 import PIL.Image
 import PyPDF2
 import docx
-import json
 import gspread
 from datetime import datetime
-from serpapi import GoogleSearch
 from openai import OpenAI
-from oauth2client.service_account import ServiceAccountCredentials
+from serpapi import GoogleSearch
+from dotenv import load_dotenv
+from google.oauth2.service_account import Credentials
+
+load_dotenv()  # Load .env vars
+
+
+service_account_info = {
+    "type": os.getenv("GCP_TYPE"),
+    "project_id": os.getenv("GCP_PROJECT_ID"),
+    "private_key_id": os.getenv("GCP_PRIVATE_KEY_ID"),
+    "private_key": os.getenv("GCP_PRIVATE_KEY").replace('\\n', '\n'),
+    "client_email": os.getenv("GCP_CLIENT_EMAIL"),
+    "client_id": os.getenv("GCP_CLIENT_ID"),
+    "auth_uri": os.getenv("GCP_AUTH_URI"),
+    "token_uri": os.getenv("GCP_TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("GCP_AUTH_PROVIDER_X509_CERT_URL"),
+    "client_x509_cert_url": os.getenv("GCP_CLIENT_X509_CERT_URL"),
+}
+
+creds = Credentials.from_service_account_info(service_account_info)
+gc = gspread.authorize(creds)
 
 # === Setup Google Sheets ===
 cred_file = "chatbot-467212-076f56c6938b.json"
@@ -40,11 +60,11 @@ except Exception as e:
 
 # === Setup OpenRouter ===
 client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    base_url=os.getenv("OPENAPI_BASE_URL"),
+    api_key=os.getenv("OPENAPI_API_KEY"),
 )
 
-SERPAPI_KEY = "aea58880b4874927e429f847abed9bbe50e1123209da76b153faa1160872d3e1"
+SERPAPI_KEY = os.getenv("SERPAPI_KEY")
 mode = "chat"
 file_content = ""
 chat_history = []

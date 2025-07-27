@@ -5,4 +5,5 @@ pytesseract
 pillow
 gspread
 oauth2client
-serpapi
+google-search-results
+python-dotenv
